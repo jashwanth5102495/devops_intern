@@ -63,3 +63,7 @@ docker run -p 3000:3000 nodejs-demo-app
 
 - `PORT` - Server port (default: 3000)
 - `NODE_ENV` - Environment mode (development/production)
+
+## Status
+
+✅ CI/CD Pipeline Ready!
