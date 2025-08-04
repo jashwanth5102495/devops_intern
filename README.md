@@ -4,12 +4,15 @@ A sample Node.js web application demonstrating automated CI/CD pipeline using Gi
 
 ## Features
 
-- Express.js web server
-- REST API endpoints
-- Automated testing with Jest
-- Docker containerization
-- CI/CD pipeline with GitHub Actions
-- Health check and app info endpoints
+- Express.js web server with REST API
+- Automated testing with Jest & Supertest
+- Docker containerization with multi-stage builds
+- Advanced CI/CD pipeline with GitHub Actions
+- Security scanning and vulnerability detection
+- Performance monitoring and metrics collection
+- Load testing capabilities
+- Health checks and system monitoring
+- Production-ready deployment automation
 
 ## Quick Start
 
@@ -32,14 +35,27 @@ npm start
 - `GET /` - Main web interface
 - `GET /api/health` - Health check endpoint
 - `GET /api/info` - Application information
+- `GET /api/pipeline` - CI/CD pipeline information
+- `GET /api/metrics` - System performance metrics
 
-## CI/CD Pipeline
+## Advanced CI/CD Pipeline
 
 The GitHub Actions workflow includes:
 
-1. **Test Stage**: Runs tests on Node.js 18.x and 20.x
-2. **Build Stage**: Creates and pushes Docker image
-3. **Deploy Stage**: Deploys to production (main branch only)
+1. **Test Stage**: Multi-version testing (Node.js 18.x, 20.x)
+2. **Security Stage**: Vulnerability scanning and secret detection
+3. **Build Stage**: Docker image creation and registry push
+4. **Deploy Stage**: Production deployment with health checks
+5. **Monitoring**: Automated performance and security monitoring
+
+### Additional Scripts
+```bash
+npm run test:coverage    # Run tests with coverage report
+npm run load-test       # Performance load testing
+npm run security-audit  # Security vulnerability scan
+npm run docker:build    # Local Docker image build
+npm run docker:run      # Run Docker container locally
+```
 
 ## Docker
 
