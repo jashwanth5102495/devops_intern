@@ -53,9 +53,35 @@ Status: ${data.status}`;
     }
 }
 
+async function getMetrics() {
+    const metricsDiv = document.getElementById('metrics');
+    metricsDiv.textContent = 'Loading...';
+    
+    try {
+        const response = await fetch('/api/metrics');
+        const data = await response.json();
+        
+        metricsDiv.textContent = `
+Uptime: ${data.uptime} seconds
+Memory RSS: ${data.memory.rss}
+Heap Used: ${data.memory.heapUsed}
+Platform: ${data.platform}
+Architecture: ${data.arch}
+Process ID: ${data.pid}`;
+    } catch (error) {
+        metricsDiv.innerHTML = `<span class="status-error">❌ ERROR</span>\n${error.message}`;
+    }
+}
+
 // Load initial data
 document.addEventListener('DOMContentLoaded', () => {
     checkHealth();
     getInfo();
     getPipelineInfo();
+    getMetrics();
+    
+    // Auto-refresh metrics every 30 seconds
+    setInterval(() => {
+        getMetrics();
+    }, 30000);
 });

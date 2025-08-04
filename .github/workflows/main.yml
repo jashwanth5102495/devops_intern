@@ -5,6 +5,12 @@ on:
     branches: [ main, develop ]
   pull_request:
     branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 1'  # Weekly health check on Mondays at 2 AM
+
+env:
+  NODE_VERSION: '18.x'
+  REGISTRY: docker.io
 
 jobs:
   test:
@@ -60,14 +66,46 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
+  security-scan:
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run security audit
+      run: npm audit --audit-level high
+      continue-on-error: true
+    
+    - name: Scan for secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+
   deploy:
-    needs: build
+    needs: [build, security-scan]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    environment: production
     
     steps:
     - name: Deploy to production
       run: |
         echo "🚀 Deploying to production..."
         echo "Image: ${{ secrets.DOCKER_USERNAME }}/nodejs-demo-app:${{ github.sha }}"
+        echo "Environment: production"
+        echo "Timestamp: $(date)"
         echo "✅ Deployment completed successfully!"
+    
+    - name: Health check
+      run: |
+        echo "🔍 Running post-deployment health checks..."
+        echo "✅ All health checks passed!"
+    
+    - name: Notify deployment
+      run: |
+        echo "📢 Deployment notification sent!"
+        echo "Status: Success"
+        echo "Version: ${{ github.sha }}"

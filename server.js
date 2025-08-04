@@ -41,6 +41,22 @@ app.get('/api/pipeline', (req, res) => {
   });
 });
 
+app.get('/api/metrics', (req, res) => {
+  const memUsage = process.memoryUsage();
+  res.json({
+    uptime: Math.floor(process.uptime()),
+    memory: {
+      rss: Math.round(memUsage.rss / 1024 / 1024) + ' MB',
+      heapTotal: Math.round(memUsage.heapTotal / 1024 / 1024) + ' MB',
+      heapUsed: Math.round(memUsage.heapUsed / 1024 / 1024) + ' MB'
+    },
+    cpu: process.cpuUsage(),
+    platform: process.platform,
+    arch: process.arch,
+    pid: process.pid
+  });
+});
+
 // Start server
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

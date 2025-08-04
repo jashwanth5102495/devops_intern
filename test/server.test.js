@@ -36,4 +36,14 @@ describe('Server Tests', () => {
     expect(response.body).toHaveProperty('docker', 'Automated Build & Push');
     expect(response.body).toHaveProperty('status', 'Active');
   });
+
+  test('GET /api/metrics should return system metrics', async () => {
+    const response = await request(app).get('/api/metrics');
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('uptime');
+    expect(response.body).toHaveProperty('memory');
+    expect(response.body).toHaveProperty('platform');
+    expect(response.body.memory).toHaveProperty('rss');
+    expect(response.body.memory).toHaveProperty('heapUsed');
+  });
 });
