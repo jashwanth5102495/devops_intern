@@ -25,7 +25,19 @@ app.get('/api/info', (req, res) => {
   res.json({
     app: 'Node.js Demo App',
     environment: process.env.NODE_ENV || 'development',
-    uptime: process.uptime()
+    uptime: process.uptime(),
+    buildTime: new Date().toISOString(),
+    nodeVersion: process.version
+  });
+});
+
+app.get('/api/pipeline', (req, res) => {
+  res.json({
+    cicd: 'GitHub Actions',
+    docker: 'Automated Build & Push',
+    testing: 'Jest & Supertest',
+    deployment: 'Continuous Deployment',
+    status: 'Active'
   });
 });
 

@@ -26,5 +26,14 @@ describe('Server Tests', () => {
     expect(response.body).toHaveProperty('app', 'Node.js Demo App');
     expect(response.body).toHaveProperty('environment');
     expect(response.body).toHaveProperty('uptime');
+    expect(response.body).toHaveProperty('nodeVersion');
+  });
+
+  test('GET /api/pipeline should return pipeline info', async () => {
+    const response = await request(app).get('/api/pipeline');
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('cicd', 'GitHub Actions');
+    expect(response.body).toHaveProperty('docker', 'Automated Build & Push');
+    expect(response.body).toHaveProperty('status', 'Active');
   });
 });

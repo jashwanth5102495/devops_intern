@@ -26,9 +26,30 @@ async function getInfo() {
         infoDiv.textContent = `
 App: ${data.app}
 Environment: ${data.environment}
-Uptime: ${Math.floor(data.uptime)} seconds`;
+Uptime: ${Math.floor(data.uptime)} seconds
+Build Time: ${data.buildTime}
+Node Version: ${data.nodeVersion}`;
     } catch (error) {
         infoDiv.innerHTML = `<span class="status-error">❌ ERROR</span>\n${error.message}`;
+    }
+}
+
+async function getPipelineInfo() {
+    const pipelineDiv = document.getElementById('pipeline');
+    pipelineDiv.textContent = 'Loading...';
+    
+    try {
+        const response = await fetch('/api/pipeline');
+        const data = await response.json();
+        
+        pipelineDiv.textContent = `
+CI/CD: ${data.cicd}
+Docker: ${data.docker}
+Testing: ${data.testing}
+Deployment: ${data.deployment}
+Status: ${data.status}`;
+    } catch (error) {
+        pipelineDiv.innerHTML = `<span class="status-error">❌ ERROR</span>\n${error.message}`;
     }
 }
 
@@ -36,4 +57,5 @@ Uptime: ${Math.floor(data.uptime)} seconds`;
 document.addEventListener('DOMContentLoaded', () => {
     checkHealth();
     getInfo();
+    getPipelineInfo();
 });
