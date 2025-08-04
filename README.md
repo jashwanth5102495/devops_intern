@@ -86,3 +86,4 @@ docker run -p 3000:3000 nodejs-demo-app
 🚀 Deployed to GitHub: https://github.com/jashwanth5102495/devops_intern
 🐳 Docker Hub: https://hub.docker.com/r/jashwanth5012495/nodejs-demo-app
 🔧 Secrets Configured - Pipeline Active!
+⚡ Full Automation Enabled - Docker Hub Integration Complete!
