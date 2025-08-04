@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Demo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Node.js Demo App</h1>
+            <p>CI/CD Automation with GitHub Actions</p>
+        </header>
+        
+        <main>
+            <div class="card">
+                <h2>App Status</h2>
+                <div id="status">Loading...</div>
+                <button onclick="checkHealth()">Check Health</button>
+            </div>
+            
+            <div class="card">
+                <h2>App Information</h2>
+                <div id="info">Loading...</div>
+                <button onclick="getInfo()">Get Info</button>
+            </div>
+            
+            <div class="card">
+                <h2>Features</h2>
+                <ul>
+                    <li>✅ Express.js server</li>
+                    <li>✅ REST API endpoints</li>
+                    <li>✅ Automated testing</li>
+                    <li>✅ CI/CD pipeline</li>
+                    <li>✅ Docker containerization</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
