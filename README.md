@@ -67,3 +67,4 @@ docker run -p 3000:3000 nodejs-demo-app
 ## Status
 
 ✅ CI/CD Pipeline Ready!
+🚀 Deployed to GitHub: https://github.com/jashwanth5102495/devops_intern
